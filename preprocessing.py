@@ -27,13 +27,13 @@ def preprocessing():
   return 2*np.pi*np.pi*np.sin(np.pi*x)*np.sin(np.pi*y)
 
  # Input training set
- x_train = nn.tensor((pd.read_csv("load_from_csv/meshNodes_1.txt", delim_whitespace=True, header=0, dtype='float64')).values)
+ x_train = nn.tensor((pd.read_csv("meshNodes_1.txt", delim_whitespace=True, header=0, dtype='float64')).values)
 
  # Output training set (target for -Δu(x,y))
  y_train = f(x_train[:,0],x_train[:,1]).reshape(-1,1)
 
  # Input test set (thicker than the choice made for the training set)
- x_test = nn.tensor((pd.read_csv("load_from_csv/meshQuadPts_1.txt", delim_whitespace=True, header=0, dtype='float64')).values)
+ x_test = nn.tensor((pd.read_csv("meshQuadPts_1.txt", delim_whitespace=True, header=0, dtype='float64')).values)
 
  # Output test set (target for u(x,y))
  y_test = u(x_test[:,0],x_test[:,1]).reshape(-1,1)
