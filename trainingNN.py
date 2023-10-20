@@ -66,7 +66,7 @@ def trainingNN(MyNN, x_train, y_train, min_err, epoch):
                 (1-2*y)*x*(1-x)*ynn_y + y*x*(1-y)*(1-x)*ynn_yy
 
   # Calculate the error between the target and the output
-  error = loss(-1*u_laplacian, odata)
+  error = loss(-1*u_laplacian, odata).sqrt()
 
   # Calculate the gradient for each tensor of weight and bias
   error.backward()  
