@@ -13,14 +13,14 @@ def validationNN(MyNN, x_test, y_test):
  y = torch.reshape(x_test[:,1],(x_test.size(0),1))
  w = torch.reshape(x_test[:,2],(x_test.size(0),1))
 
- # Approximated NN's output u(x,y)
+ # Approximated NN's output u(x_test)
  u = MyNN(x_test[:,:2])*x*y*(1-x)*(1-y) + 0
 
- # Calculate l2-norm of the error, error = ( u(x,y) - u_NN(x,y,p) ) * (w(x,y))^(1/2)
+ # Calculate l2-norm of the error, error = ( u(x,y) - u_t(x,y) ) * (w(x,y))^(1/2) for each (x,y) in x_test
  error = (y_test - u.detach().numpy())*np.sqrt(w)
  l2_error = np.linalg.norm(error)
 
- # Plot both approximated and ideal u(x,y)
+ # Plot both approximated and ideal u(x_test)
  fig = plt.figure(figsize=(9, 9))
  ax = fig.gca(projection='3d')
  ax.set_title('u(x_test) analitical solution Vs. u_t(x_test) approximated via NN', fontsize=20)
@@ -32,7 +32,7 @@ def validationNN(MyNN, x_test, y_test):
  plt.legend()
  plt.show()
 
- # Plot the punctual error ( u(x,y) - u_NN(x,y,p) )
+ # Plot the punctual error ( u(x_test) - u_t(x_test) )
  fig_err = plt.figure(figsize=(9, 9))
  ax_err = fig_err.gca(projection='3d')
  ax_err.set_title('Punctual Error: u(x_test)-u_t(x_test)', fontsize=20)
