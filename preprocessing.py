@@ -9,7 +9,7 @@ import pandas as pd
 
 def preprocessing():
 
- # Define the Dirichlet Problem:  -Δu(x,y) = f(x) = 2*pi*pi*sin(pi*x)*sin(pi*y) for x ∈ (0,1), y ∈ (0,1)
+ # Define the Dirichlet Problem:  -Δu(x,y) = f(x,y) = 2*pi*pi*sin(pi*x)*sin(pi*y) for x ∈ (0,1), y ∈ (0,1)
  #                                u(0,y) = u(1,y) = u(x,0) = u(x,1) = 0  board condition in 1x1 square
  # The solution has the form:
  # u(x,y) = B + x*y*(1-x)*(1-y)*N(x,y,p)
@@ -22,7 +22,7 @@ def preprocessing():
  def u(x,y):
   return np.sin(np.pi*x)*np.sin(np.pi*y)
 
- # Define of f(x,y)
+ # Define f(x,y)
  def f(x,y):
   return 2*np.pi*np.pi*np.sin(np.pi*x)*np.sin(np.pi*y)
 
