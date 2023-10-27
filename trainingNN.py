@@ -43,19 +43,19 @@ def trainingNN(MyNN, x_train, y_train, min_err, epoch):
   # Calculate the output of the Neural Network from the given input dataset
   ynn = MyNN(idata)
 
-  # Calculate the first derivative of the NN wrt the first input (x)
+  # Calculate the first derivative (δN(x,y,p)/δx) of the NN wrt the first input (x)
   ynn_x = (MyNN(idata + epsilon_x) - MyNN(idata)) / epsilon
 
-  # Calculate the first derivative of the NN wrt the second input (y)
+  # Calculate the first derivative (δN(x,y,p)/δy) of the NN wrt the second input (y)
   ynn_y = (MyNN(idata + epsilon_y) - MyNN(idata)) / epsilon
 
-  # Calculate the second derivative of the NN wrt the first input (x)
+  # Calculate the second derivative (δδN(x,y,p)/δx^2) of the NN wrt the first input (x)
   ynn_xx = (MyNN(idata + 2*epsilon_x) - 2*MyNN(idata+epsilon_x) + MyNN(idata)) / (epsilon*epsilon)
 
-  # Calculate the second derivative of the NN wrt the second input (y)
+  # Calculate the second derivative (δδN(x,y,p)/δy^2) of the NN wrt the second input (y)
   ynn_yy = (MyNN(idata + 2*epsilon_y) - 2*MyNN(idata+epsilon_y) + MyNN(idata)) / (epsilon*epsilon)
 
-  # Calculate Δu(x,y)
+  # Calculate Δu(x,y), with u = x(1-x)y(1-y)N(x,y,p) + B, B = 0
   # Δu(x,y) =  -2*y*(1-y)*N(x,y,p) + (1-2x)*y*(1-y)*(δN(x,y,p)/δx) +
   #          (1-2x)*y*(1-y)*(δN(x,y,p)/δx) + x*y*(1-x)*(1-y)*(δδN(x,y,p)/δx^2) +
   #          -2*x*(1-x)*N(x,y,p) + (1-2y)*x*(1-x)*(δN(x,y,p)/δy) +
