@@ -16,9 +16,9 @@ def validationNN(MyNN, x_test, y_test):
  # Approximated u_t(x_test)
  u = MyNN(x_test[:,:2])*x*y*(1-x)*(1-y) + 0
 
- # Calculate l2-norm of the error (weighted by w(x,y)), error = ( u(x,y) - u_t(x,y) ) * (w(x,y))^(1/2), summing over the all (x,y) in x_test
- error = (y_test - u.detach().numpy())*np.sqrt(w)
- l2_error = np.linalg.norm(error)
+ # Calculate l2-norm of the error (weighted by w(x,y)), werror = ( u(x,y) - u_t(x,y) ) * (w(x,y))^(1/2), summing over the all (x,y) in x_test
+ werror = (y_test - u.detach().numpy())*np.sqrt(w)
+ l2_werror = np.linalg.norm(werror)
 
  # Plot both approximated u_t(x_test) and ideal u(x_test)
  fig = plt.figure(figsize=(9, 9))
@@ -46,7 +46,7 @@ def validationNN(MyNN, x_test, y_test):
  print("\nThe output from the NN (predictions) is:\n", u, "\n\n",
        'The target output (from measurements) is:',
        "\n", y_test, "\n\n",
-       'The l2-norm of the error is approximately equal to', l2_error)
+       'The l2-norm of the weighted error is approximately equal to', l2_werror)
 
  # Add toolbar to allow navigation for graphs (pan, zoom, etc...)
  root = tk.Tk()
