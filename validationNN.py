@@ -16,11 +16,11 @@ def validationNN(MyNN, x_test, y_test):
  # Approximated u_t(x_test)
  u = MyNN(x_test[:,:2])*x*y*(1-x)*(1-y) + 0
 
- # Calculate l2-norm of the error, error = ( u(x,y) - u_t(x,y) ) * (w(x,y))^(1/2), summing over the all (x,y) in x_test
+ # Calculate l2-norm of the error (weighted by w(x,y)), error = ( u(x,y) - u_t(x,y) ) * (w(x,y))^(1/2), summing over the all (x,y) in x_test
  error = (y_test - u.detach().numpy())*np.sqrt(w)
  l2_error = np.linalg.norm(error)
 
- # Plot both approximated and ideal u(x_test)
+ # Plot both approximated u_t(x_test) and ideal u(x_test)
  fig = plt.figure(figsize=(9, 9))
  ax = fig.gca(projection='3d')
  ax.set_title('u(x_test) analitical solution Vs. u_t(x_test) approximated via NN', fontsize=20)
@@ -28,14 +28,14 @@ def validationNN(MyNN, x_test, y_test):
  ax.set_ylabel("y", fontsize=16)
  ax.set_zlabel("z", fontsize=16)
  ax.scatter(x_test[:, 0], x_test[:, 1], y_test, color='red',label='u(x_test) [ideal]',alpha=0.1)
- ax.scatter(x_test[:, 0], x_test[:, 1], u.detach().numpy(), color='green',label='u(x_test) [approximation]', alpha =0.1)
+ ax.scatter(x_test[:, 0], x_test[:, 1], u.detach().numpy(), color='green',label='u_t(x_test) [approximation]', alpha =0.1)
  plt.legend()
  plt.show()
 
- # Plot the punctual error ( u(x_test) - u_t(x_test) )
+ # Plot the punctual error ( u(x,y) - u_t(x,y) ) for each (x,y) in x_test
  fig_err = plt.figure(figsize=(9, 9))
  ax_err = fig_err.gca(projection='3d')
- ax_err.set_title('Punctual Error: u(x_test)-u_t(x_test)', fontsize=20)
+ ax_err.set_title('Punctual Error: u - u_t', fontsize=20)
  ax_err.set_xlabel("x", fontsize=16)
  ax_err.set_ylabel("y", fontsize=16)
  ax_err.set_zlabel("z", fontsize=16)
