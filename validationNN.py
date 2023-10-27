@@ -35,7 +35,7 @@ def validationNN(MyNN, x_test, y_test):
  # Plot the punctual error ( u(x,y) - u_t(x,y) ) for each (x,y) in x_test
  fig_err = plt.figure(figsize=(9, 9))
  ax_err = fig_err.gca(projection='3d')
- ax_err.set_title('Punctual Error: u - u_t', fontsize=20)
+ ax_err.set_title('Punctual Error: u(x_test) - u_t(x_test)', fontsize=20)
  ax_err.set_xlabel("x", fontsize=16)
  ax_err.set_ylabel("y", fontsize=16)
  ax_err.set_zlabel("z", fontsize=16)
